@@ -19,7 +19,7 @@
 <meta property="og:description" content="关于命令执行的一些简单知识和简单绕过">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-12-28T04:15:59.488Z">
-<meta property="article:modified_time" content="2020-01-04T17:03:51.473Z">
+<meta property="article:modified_time" content="2020-01-05T04:01:07.325Z">
 <meta property="article:author" content="Stao">
 <meta property="article:tag" content="命令执行">
 <meta name="twitter:card" content="summary">
@@ -30,7 +30,7 @@
   
   
   <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
-  <link rel="stylesheet" href="/css/style.css?v=1578157868541">
+  <link rel="stylesheet" href="/css/style.css?v=1578197073950">
 <meta name="generator" content="Hexo 4.1.1"></head>
 
 <body class="mdui-drawer-body-left">
@@ -156,8 +156,8 @@
     </div>
   <div class="nexmoe-post-meta">
     <a><i class="nexmoefont icon-calendar-fill"></i>2019年12月28日</a>
-    <a><i class="nexmoefont icon-areachart"></i>2.4k 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 10 分钟</a>
+    <a><i class="nexmoefont icon-areachart"></i>2.6k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 11 分钟</a>
     
       <a class="nexmoefont icon-appstore-fill -link" href="/categories/web/">web</a>
     
@@ -283,6 +283,8 @@ cn\
 -O\
 1.php</code></pre><p>写的时候注意下空格，还有就是linux 需要用\对空格和\进行转义。</p>
 <h2 id="绕过-的ip过滤"><a href="#绕过-的ip过滤" class="headerlink" title="绕过.的ip过滤"></a>绕过.的ip过滤</h2><p>可以将IP地址转换为数字地址绕过。<br>如<br><a href="http://www.msxindl.com/tools/ip/ip_num.asp" target="_blank" rel="noopener">http://www.msxindl.com/tools/ip/ip_num.asp</a></p>
+<h2 id="通配符绕waf"><a href="#通配符绕waf" class="headerlink" title="通配符绕waf"></a>通配符绕waf</h2><h3 id="关于通配符"><a href="#关于通配符" class="headerlink" title="关于通配符"></a>关于通配符</h3><p>Bash标准通配符（也称为通配符模式）被各种命令行程序用于处理多个文件。有关标准通配符的更多信息，请通过键入man 7 glob命令查看手册了解。并不是每个人都知道有很多bash语法是可以使用问号“？”，正斜杠“/”，数字和字母来执行系统命令的。你甚至可以使用相同数量的字符获取文件内容。<br>如/???/ls 列出文件，实际就是执行/bin/ls<br>如/???/?at /???/p????d 获取etc/passwd，实际就是执行/bin/cat /etc/passwd</p>
+<p>具体的还是要根据实际情况，然后在命令行自己测试，写出payload.<br>两篇比较老的参考文章，里面很多大多数不能用了。<br><a href="https://www.freebuf.com/articles/web/160175.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/160175.html</a><br><a href="https://www.freebuf.com/articles/web/186298.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/186298.html</a></p>
 
   </article>
   
@@ -326,7 +328,7 @@ cn\
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<script src="/js/app.js?v=1578157868546"></script>
+<script src="/js/app.js?v=1578197073955"></script>
 <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
 
 
